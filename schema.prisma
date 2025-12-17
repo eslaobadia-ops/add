@@ -1,21 +1,12 @@
-// ===============================
-// PRISMA CLIENT
-// ===============================
 generator client {
   provider = "prisma-client-js"
 }
 
-// ===============================
-// DATABASE CONNECTION
-// ===============================
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-// ===============================
-// USER MODEL
-// ===============================
 model User {
   id       Int      @id @default(autoincrement())
   username String   @unique
@@ -25,9 +16,6 @@ model User {
   results  Result[]
 }
 
-// ===============================
-// RESULT MODEL
-// ===============================
 model Result {
   id      Int    @id @default(autoincrement())
   subject String
