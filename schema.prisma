@@ -1,0 +1,39 @@
+// ===============================
+// PRISMA CLIENT
+// ===============================
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ===============================
+// DATABASE CONNECTION
+// ===============================
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ===============================
+// USER MODEL
+// ===============================
+model User {
+  id       Int      @id @default(autoincrement())
+  username String   @unique
+  password String
+  role     String
+  paid     Boolean  @default(false)
+  results  Result[]
+}
+
+// ===============================
+// RESULT MODEL
+// ===============================
+model Result {
+  id      Int    @id @default(autoincrement())
+  subject String
+  score   Int
+  grade   String
+  userId  Int
+
+  user User @relation(fields: [userId], references: [id])
+}
