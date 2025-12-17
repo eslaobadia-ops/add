@@ -1,17 +1,16 @@
-model User {
-  id       Int      @id @default(autoincrement())
-  username String   @unique
-  password String
-  role     String
-  paid     Boolean  @default(false)
-  results  Result[]
+generator client {
+  provider = "prisma-client-js"
 }
 
-model Result {
-  id        Int    @id @default(autoincrement())
-  subject   String
-  score     Int
-  grade     String
-  userId    Int
-  user      User   @relation(fields: [userId], references: [id])
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int     @id @default(autoincrement())
+  username String  @unique
+  password String
+  role     String
+  paid     Boolean @default(false)
 }
